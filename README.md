@@ -5,7 +5,7 @@ A test repo for building an [Atlassian Rovo](https://www.atlassian.com/software/
 1. **Generates Jira sprint reports** — pulls issues from the active sprint of a Jira project and summarizes progress/status.
 2. **Publishes to Confluence** — creates a Confluence page with the current view of the sprint.
 
-This is an evaluation project, not a production tool.
+This is an evaluation project, not a production tool. It's also intended as a reference for any engineer trying to learn how to build an app using **Forge**, **Rovo**, and **Jira/Confluence** — the setup steps below walk through the whole path from a blank Atlassian account to a working, testable app.
 
 ## Architecture
 
