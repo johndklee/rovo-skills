@@ -2,13 +2,14 @@ modules:
   rovo:agent:
     - key: sprint-report-agent
       name: Sprint Reporter
-      description: Summarizes the current Jira sprint and publishes the report to Confluence.
+      description: Summarizes the current Jira sprint and publishes the report to
+        Confluence.
       prompt: >
-        You are an assistant that reports on the status of the active Jira sprint for a
-        given project. When asked for a sprint report, use the get-sprint-issues action to
-        fetch the current sprint's issues, summarize progress (counts by status, notable
-        blockers), and offer to publish the summary to Confluence using the
-        publish-sprint-report action.
+        You are an assistant that reports on the status of the active Jira
+        sprint for a given project. When asked for a sprint report, use the
+        get-sprint-issues action to fetch the current sprint's issues, summarize
+        progress (counts by status, notable blockers), and offer to publish the
+        summary to Confluence using the publish-sprint-report action.
       conversationStarters:
         - "Summarize the current sprint"
         - "Publish the sprint report to Confluence"
@@ -58,14 +59,11 @@ modules:
       handler: index.publishSprintReport
 
 app:
-  # Placeholder — running `forge register` (or `forge create`) against your own
-  # Atlassian developer account generates the real app ID. Replace this value
-  # with the one Forge assigns you.
-  id: "ari:cloud:ecosystem::app/REPLACE-WITH-YOUR-APP-ID"
+  id: ari:cloud:ecosystem::app/ca85b7a5-06f1-4bc0-b431-a77935c2b0d7
+  runtime:
+    name: nodejs22.x
 
 permissions:
-  # TODO: verify this scope list with `forge lint` — Confluence has both
-  # classic and newer granular scopes and the exact set may need adjusting.
   scopes:
     - read:jira-work
     - write:confluence-content

@@ -22,28 +22,28 @@ Forge apps run on Atlassian's hosted infrastructure — you develop and test loc
 
 ## Setup
 
-Requires Node.js and the Forge CLI, plus an Atlassian account with Forge access.
+Requires Node.js 22.x/24.x and the Forge CLI, plus an Atlassian account with Forge access.
 
 ```bash
 npm install
-npx forge login       # interactive — needs your Atlassian API token
-npx forge register     # first time only: registers this app and assigns a real app ID
+npx forge login    # interactive — needs an Atlassian API token
+npx forge register "your-app-name"   # first time only: creates a Developer Space + registers the app
 ```
 
-After `forge register`, copy the generated app ID into `manifest.yml` (`app.id`), replacing the `REPLACE-WITH-YOUR-APP-ID` placeholder.
+`forge register` writes a real `app.id` into `manifest.yml` for you.
 
 ```bash
-npx forge lint         # validates manifest.yml — also worth checking the permission scopes
-npx forge tunnel        # run/test locally against a real dev site
-npx forge deploy        # deploy to Atlassian
-npx forge install       # install the app on your Jira/Confluence site
+npx forge lint      # validates manifest.yml
+npx forge tunnel     # run/test locally against a real dev site
+npx forge deploy     # deploy to Atlassian
+npx forge install    # install the app on your Jira/Confluence site
 ```
 
 ## Status
 
-`manifest.yml` and `src/index.ts` are a first-pass scaffold:
-- The Confluence permission scopes in `manifest.yml` are marked `TODO` — verify with `forge lint` against your site.
-- The Jira JQL query (`sprint in openSprints()`) and Confluence v2 page-creation call are based on documented, stable REST API endpoints but haven't been tested against a real site yet.
+- App registered, `forge lint` passes clean.
+- Not yet deployed/installed against a real Jira/Confluence site — the Jira JQL query (`sprint in openSprints()`) and Confluence v2 page-creation call are based on documented, stable REST API endpoints but untested end-to-end.
+- Next step: `forge tunnel` or `forge deploy` + `forge install` against a real dev site to actually exercise the two actions.
 
 ## Note
 
