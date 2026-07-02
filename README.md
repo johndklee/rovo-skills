@@ -22,15 +22,26 @@ Forge apps run on Atlassian's hosted infrastructure — you develop and test loc
 
 ## Setup
 
-Requires Node.js 22.x/24.x and the Forge CLI, plus an Atlassian account with Forge access.
+### Prerequisites
+
+- **Node.js 22.x or 24.x.** Forge CLI 13.x warns/may misbehave on other versions (23.x, 25.x, 26.x included). Check with `node --version`; on macOS with Homebrew: `brew install node@24 && brew link --overwrite node@24`.
+- **An Atlassian account** with access to create a Forge app.
+- **An Atlassian API token**, used to log in the Forge CLI: create one at [id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens). Never commit this token — `forge login` stores it in your local Forge CLI config, not in this repo.
+
+### Steps
 
 ```bash
 npm install
-npx forge login    # interactive — needs an Atlassian API token
-npx forge register "your-app-name"   # first time only: creates a Developer Space + registers the app
+npx forge login
 ```
 
-`forge register` writes a real `app.id` into `manifest.yml` for you.
+`forge login` prompts interactively for your Atlassian email and the API token above.
+
+```bash
+npx forge register "your-app-name"
+```
+
+First time only. If your account isn't in a Developer Space yet, this also prompts you to create one (just a container for your Forge apps) — pick any name. `forge register` then writes a real `app.id` into `manifest.yml` for you.
 
 ```bash
 npx forge lint      # validates manifest.yml
@@ -38,6 +49,8 @@ npx forge tunnel     # run/test locally against a real dev site
 npx forge deploy     # deploy to Atlassian
 npx forge install    # install the app on your Jira/Confluence site
 ```
+
+`forge tunnel` and `forge install` need a real Jira/Confluence site (a free [developer sandbox site](https://developer.atlassian.com/platform/forge/set-up-instance/) works) to target.
 
 ## Status
 
