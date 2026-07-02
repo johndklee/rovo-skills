@@ -13,7 +13,7 @@
     "@forge/api": "^4.0.0"
   },
   "devDependencies": {
-    "@forge/cli": "^13.0.0",
+    "@forge/cli": "13.0.0",
     "@types/node": "^20.0.0",
     "typescript": "^5.5.0"
   }
