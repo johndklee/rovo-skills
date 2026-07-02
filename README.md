@@ -25,6 +25,7 @@ Forge apps run on Atlassian's hosted infrastructure — you develop and test loc
 ### Prerequisites
 
 - **Node.js 22.x or 24.x.** Forge CLI 13.x warns/may misbehave on other versions (23.x, 25.x, 26.x included). Check with `node --version`; on macOS with Homebrew: `brew install node@24 && brew link --overwrite node@24`.
+- **A Jira/Confluence Cloud site.** If you don't already have one, sign up at [atlassian.com/try/cloud/signup](https://www.atlassian.com/try/cloud/signup) — the **Free** plan (up to 10 users, no credit card, permanent) is enough to develop and test this app. If you need more users, storage, or support, you can start a **Premium** trial (30 days) or **Standard** trial (7 days) from the same flow; see [atlassian.com/software/free](https://www.atlassian.com/software/free) for plan comparisons.
 - **An Atlassian account** with access to create a Forge app.
 - **An Atlassian API token**, used to log in the Forge CLI: create one at [id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens). Never commit this token — `forge login` stores it in your local Forge CLI config, not in this repo.
 
