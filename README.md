@@ -25,7 +25,8 @@ Forge apps run on Atlassian's hosted infrastructure — you develop and test loc
 ### Prerequisites
 
 - **Node.js 22.x or 24.x.** Forge CLI 13.x warns/may misbehave on other versions (23.x, 25.x, 26.x included). Check with `node --version`; on macOS with Homebrew: `brew install node@24 && brew link --overwrite node@24`.
-- **A Jira/Confluence Cloud site.** If you don't already have one, sign up at [atlassian.com/try/cloud/signup](https://www.atlassian.com/try/cloud/signup) — the **Free** plan (up to 10 users, no credit card, permanent) is enough to develop and test this app. If you need more users, storage, or support, you can start a **Premium** trial (30 days) or **Standard** trial (7 days) from the same flow; see [atlassian.com/software/free](https://www.atlassian.com/software/free) for plan comparisons.
+- **A Jira/Confluence Cloud site.** If you don't already have one, sign up at [atlassian.com/try/cloud/signup](https://www.atlassian.com/try/cloud/signup). The **Free** plan (up to 10 users, no credit card, permanent) is enough to `forge deploy`/`forge install` this app, but **not enough to actually chat with the Rovo Agent** — see the Rovo access note below. See [atlassian.com/software/free](https://www.atlassian.com/software/free) for plan comparisons.
+- **Rovo access, to actually invoke the agent.** Rovo requires a **Standard, Premium, or Enterprise** plan — it is not available on Free, and there is no free/developer-only bypass ([confirmed via Atlassian's own activation docs](https://support.atlassian.com/organization-administration/docs/activate-or-deactivate-rovo-on-your-site/)). Separately, Atlassian also gates Rovo activation behind a **verified business domain** for the org admin account — generic domains (gmail.com, outlook.com, etc.) are excluded. Practical path: start a **Premium trial** (30 days, free) on your site, using an org admin email on a real custom domain you control, then check admin console → Apps → AI settings → AI-enabled apps to activate Rovo.
 - **An Atlassian account** with access to create a Forge app.
 - **An Atlassian API token**, used to log in the Forge CLI: create one at [id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens). Never commit this token — `forge login` stores it in your local Forge CLI config, not in this repo.
 
@@ -55,9 +56,9 @@ npx forge install    # install the app on your Jira/Confluence site
 
 ## Status
 
-- App registered, `forge lint` passes clean.
-- Not yet deployed/installed against a real Jira/Confluence site — the Jira JQL query (`sprint in openSprints()`) and Confluence v2 page-creation call are based on documented, stable REST API endpoints but untested end-to-end.
-- Next step: `forge tunnel` or `forge deploy` + `forge install` against a real dev site to actually exercise the two actions.
+- App registered, `forge lint` passes clean, deployed and installed on both Jira and Confluence for a test site.
+- Rovo chat isn't reachable on that site yet — it's on the Free plan, which doesn't include Rovo (see the Rovo access note above). Still need a Premium/Standard trial + business-domain admin email to actually invoke the agent end-to-end.
+- The Jira JQL query (`sprint in openSprints()`) and Confluence v2 page-creation call are based on documented, stable REST API endpoints but still untested end-to-end since the agent itself can't be invoked yet.
 
 ## Note
 
