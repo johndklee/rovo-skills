@@ -1,0 +1,72 @@
+modules:
+  rovo:agent:
+    - key: sprint-report-agent
+      name: Sprint Reporter
+      description: Summarizes the current Jira sprint and publishes the report to Confluence.
+      prompt: >
+        You are an assistant that reports on the status of the active Jira sprint for a
+        given project. When asked for a sprint report, use the get-sprint-issues action to
+        fetch the current sprint's issues, summarize progress (counts by status, notable
+        blockers), and offer to publish the summary to Confluence using the
+        publish-sprint-report action.
+      conversationStarters:
+        - "Summarize the current sprint"
+        - "Publish the sprint report to Confluence"
+      actions:
+        - get-sprint-issues
+        - publish-sprint-report
+
+  action:
+    - key: get-sprint-issues
+      name: Get sprint issues
+      function: getSprintIssuesFn
+      actionVerb: GET
+      description: Fetches issues in the active sprint for a given Jira project.
+      inputs:
+        projectKey:
+          title: Project key
+          type: string
+          required: true
+          description: The Jira project key to read the active sprint from (e.g. PROJ).
+
+    - key: publish-sprint-report
+      name: Publish sprint report
+      function: publishSprintReportFn
+      actionVerb: CREATE
+      description: Creates a Confluence page with the sprint report content.
+      inputs:
+        spaceKey:
+          title: Confluence space key
+          type: string
+          required: true
+          description: The Confluence space to publish the report into.
+        title:
+          title: Page title
+          type: string
+          required: true
+          description: Title for the new Confluence page.
+        content:
+          title: Page content
+          type: string
+          required: true
+          description: The report body in Confluence storage format (HTML-like XML).
+
+  function:
+    - key: getSprintIssuesFn
+      handler: index.getSprintIssues
+    - key: publishSprintReportFn
+      handler: index.publishSprintReport
+
+app:
+  # Placeholder — running `forge register` (or `forge create`) against your own
+  # Atlassian developer account generates the real app ID. Replace this value
+  # with the one Forge assigns you.
+  id: "ari:cloud:ecosystem::app/REPLACE-WITH-YOUR-APP-ID"
+
+permissions:
+  # TODO: verify this scope list with `forge lint` — Confluence has both
+  # classic and newer granular scopes and the exact set may need adjusting.
+  scopes:
+    - read:jira-work
+    - write:confluence-content
+    - read:confluence-space.summary

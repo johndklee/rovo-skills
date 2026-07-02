@@ -1,0 +1,20 @@
+{
+  "name": "rovo-skills",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "forge lint",
+    "tunnel": "forge tunnel",
+    "deploy": "forge deploy",
+    "install:app": "forge install"
+  },
+  "dependencies": {
+    "@forge/api": "^4.0.0"
+  },
+  "devDependencies": {
+    "@forge/cli": "^13.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0"
+  }
+}
